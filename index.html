@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>1 to 100 Divs</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="range" min="1" max="10" v-model="count" v-on:input="updateDimension">
+      <div>
+        <div v-for="i in width" class="row">
+          <input v-for="i in width" class="square" v-model="count"></input>
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: function() {
+          return {
+            count: 1,
+            width: [1]
+          }
+        },
+        methods: {
+          updateDimension: function(event) {
+            this.count = event.target.value
+            let dimension = []
+            for (var i = 0; i < this.count; i++) {
+              dimension.push(i+1)
+            }
+            this.width = dimension
+          },
+          getColor: function(event) {
+            var r = this.getVal()
+            var g = this.getVal()
+            var b = this.getVal()
+            var rgb = `rgb(${r}, ${g}, ${b})`
+            console.log(rgb)
+            return rgb
+            // rgb(127, 127, 127)
+          },
+          getVal: function() {
+            return Math.floor(Math.random() * 128)
+          }
+        }
+      })
+    </script>
+    <style>
+      .row {
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+      }
+      .square {
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 10%;
+        height: 9vw;
+        outline: 1px solid black;
+      }
+    </style>
+  </body>
+</html>
